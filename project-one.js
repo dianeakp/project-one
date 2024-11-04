@@ -93,13 +93,6 @@ export class projectOne extends DDDSuper(I18NMixin(LitElement)) {
         refreshes
       </p>
 
-      <p>
-        Unfortunately, after multiple troubleshoots I have not been able to get
-        my diagram to be uploaded to vercel. Please refer to github and check
-        the Diagram in my Diagram Folder in my lib folder. I'm sorry for any
-        inconvenience.
-      </p>
-
       <h1>Diagram Plan</h1>
       <img src="/lib/Diagram/Diagram.png" />
       <slot></slot>
