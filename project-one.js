@@ -68,7 +68,33 @@ export class projectOne extends DDDSuper(I18NMixin(LitElement)) {
   // Lit render the HTML
   render() {
     return html` <div class="wrapper">
-      <h3><span>${this.t.title}:</span> ${this.title}</h3>
+      <h3><span>${this.title}Code Goes Here!</span> ${this.title}</h3>
+      <p>
+        Properties have been initialized. More developments will be made this
+        coming week!
+      </p>
+      <p>
+        * unfortunately * npm install --global @haxtheweb/create does not work
+        for me!
+      </p>
+      <p>Will try again at office hours or during class time</p>
+
+      <h1>Game Plan</h1>
+      <p>
+        Step 1: Code the functionality to take the URL, check for site.json, and
+        fetch it
+      </p>
+      <p>
+        Step 2: Populate the overview section as described in my diagram and
+        create cards for each item
+      </p>
+      <p>
+        Step 3: Test to ensure re-entering a URL clears the orevious data and
+        refreshes
+      </p>
+
+      <h1>Diagram Plan</h1>
+      <img src="lib/diagram/diagram.png" />
       <slot></slot>
     </div>`;
   }
