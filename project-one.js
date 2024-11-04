@@ -94,7 +94,7 @@ export class projectOne extends DDDSuper(I18NMixin(LitElement)) {
       </p>
 
       <h1>Diagram Plan</h1>
-      <img src="lib/diagram/diagram.png" />
+      <img src="lib/Diagram/Diagram.png" />
       <slot></slot>
     </div>`;
   }
