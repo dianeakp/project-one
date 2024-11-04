@@ -1,0 +1,167 @@
+{
+  "schemaVersion": "1.0.0",
+  "readme": "",
+  "modules": [
+    {
+      "kind": "javascript-module",
+      "path": "project-one.js",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "`project-one`",
+          "name": "projectOne",
+          "members": [
+            {
+              "kind": "field",
+              "name": "tag",
+              "static": true
+            },
+            {
+              "kind": "field",
+              "name": "haxProperties",
+              "static": true,
+              "description": "haxProperties integration via file reference"
+            },
+            {
+              "kind": "field",
+              "name": "siteName",
+              "type": {
+                "text": "string"
+              },
+              "default": "\"\"",
+              "privacy": "public",
+              "attribute": "site-name",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "description",
+              "type": {
+                "text": "string"
+              },
+              "default": "\"\"",
+              "privacy": "public",
+              "attribute": "description"
+            },
+            {
+              "kind": "field",
+              "name": "logo",
+              "type": {
+                "text": "string"
+              },
+              "default": "\"\"",
+              "privacy": "public",
+              "attribute": "logo"
+            },
+            {
+              "kind": "field",
+              "name": "theme",
+              "type": {
+                "text": "string"
+              },
+              "default": "\"\"",
+              "privacy": "public",
+              "attribute": "theme"
+            },
+            {
+              "kind": "field",
+              "name": "created",
+              "type": {
+                "text": "string"
+              },
+              "default": "\"\"",
+              "privacy": "public",
+              "attribute": "created"
+            },
+            {
+              "kind": "field",
+              "name": "lastUpdated",
+              "type": {
+                "text": "string"
+              },
+              "default": "\"\"",
+              "privacy": "public",
+              "attribute": "lastUpdated"
+            },
+            {
+              "kind": "field",
+              "name": "hexCode",
+              "type": {
+                "text": "string"
+              },
+              "default": "\"\"",
+              "privacy": "public",
+              "attribute": "hexCode"
+            },
+            {
+              "kind": "field",
+              "name": "",
+              "privacy": "public",
+              "attribute": ""
+            }
+          ],
+          "attributes": [
+            {
+              "name": "",
+              "fieldName": ""
+            },
+            {
+              "name": "site-name",
+              "fieldName": "siteName"
+            },
+            {
+              "name": "description",
+              "fieldName": "description"
+            },
+            {
+              "name": "logo",
+              "fieldName": "logo"
+            },
+            {
+              "name": "theme",
+              "fieldName": "theme"
+            },
+            {
+              "name": "created",
+              "fieldName": "created"
+            },
+            {
+              "name": "lastUpdated",
+              "fieldName": "lastUpdated"
+            },
+            {
+              "name": "hexCode",
+              "fieldName": "hexCode"
+            }
+          ],
+          "mixins": [
+            {
+              "name": "DDDSuper",
+              "package": "@haxtheweb/d-d-d/d-d-d.js"
+            },
+            {
+              "name": "I18NMixin",
+              "package": "@haxtheweb/i18n-manager/lib/I18NMixin.js"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "project-one",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "projectOne",
+          "declaration": {
+            "name": "projectOne",
+            "module": "project-one.js"
+          }
+        }
+      ]
+    }
+  ]
+}
