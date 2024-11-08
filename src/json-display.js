@@ -7,15 +7,22 @@ export class JsonDisplay extends DDDSuper(LitElement) {
   constructor() {
     super();
     this.title = "";
-    this.source = "";
-    this.altDes = "";
+    this.slug = "";
+    this.description = "";
+    this.location = "";
+    this.img = "";
+    this.locked = "";
   }
 
   static get properties() {
     return {
       source: { type: String },
       title: { type: String },
-      altDes: { type: String, attribute: "alt-description" },
+      description: { type: String, attribute: "alt-description" },
+      slug: { type: String },
+      location: { type: String },
+      img: { type: String },
+      locked: { type: String },
     };
   }
 
@@ -48,8 +55,12 @@ export class JsonDisplay extends DDDSuper(LitElement) {
   render() {
     return html`
       <div class="image">
-        <img src="${this.source}" alt=${this.altDes} />
+        <img src="${this.img}" />
         <div>Title: ${this.title}</div>
+        <div>Description: ${this.description}</div>
+        <div><a href="${this.slug}" target="_blank">Slug</a></div>
+        <div><a href="${this.location}" target="_blank">Location</a></div>
+        <div>Locked: ${this.locked}</div>
       </div>
     `;
   }

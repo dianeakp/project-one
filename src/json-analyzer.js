@@ -73,7 +73,21 @@ export class JsonAnalyzer extends LitElement {
       <h2>Json Analyzer! Please enter your URL</h2>
       <input id="input" placeholder="Add URL Here" />
       <button class="AnalyzeButton" @click=${this.getData}>Analyze</button>
-      <div class="results">${this.items.map}</div>
+      <div class="results">
+        ${this.items.map(
+          (item, index) => html`
+            <json-display
+              source=${item.href}
+              title=${item.title}
+              description=${item.description}
+              slug=https://www.haxtheweb.org/${item.slug}
+              location=https://www.haxtheweb.org/${item.location}
+              image=https://www.haxtheweb.org/${item.image}
+              locked=${item.locked}
+            ></json-display>
+          `
+        )}
+      </div>
 
       <simple-icon icon="${this.icon}"></simple-icon>
     `;
@@ -99,7 +113,7 @@ export class JsonAnalyzer extends LitElement {
           // this.hexcode = data.metadata.theme.hexCode;
           // this.icon = data.metadata.theme.icon;
 
-          console.log(this.description);
+          console.log(this.items);
           this.loading = false;
         }
       });
