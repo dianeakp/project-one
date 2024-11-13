@@ -35,6 +35,16 @@ export class JsonAnalyzer extends LitElement {
         transition: 0.5s all ease-in-out;
       }
 
+      .overview {
+        width: 500px;
+        padding: 10px;
+        margin: 10px;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        background-color: var(--ddd-theme-default-creekTeal);
+      }
+
       .AnalyzeButton {
         background-color: var(--ddd-theme-default-keystoneYellow);
         height: 45px;
@@ -91,12 +101,24 @@ export class JsonAnalyzer extends LitElement {
     return html`
       <h2>Json Analyzer! Please enter your URL</h2>
       <!-- <input type="submit" value="Send Request" /> -->
-      <input
-        id="input"
-        placeholder="Add URL Here"
-        @keydown=${this.handleKeyDown}
-      />
-      <button class="AnalyzeButton" @click=${this.getData}>Analyze</button>
+      <form>
+        <input id="input" placeholder="Add URL Here" />
+        <button type="submit" class="AnalyzeButton" @click=${this.getData}>
+          Analyze
+        </button>
+      </form>
+      <div class="overview">
+        <img src="https://www.haxtheweb.org/${this.logo}" />
+        <div class="info">
+          <div class="name">${this.name}</div>
+          <div class="description">${this.description}</div>
+          <div class="lastUpdated">
+            Last Updated: ${this.toDate(this.lastUpdated)}
+          </div>
+          <div class="theme">Theme: ${this.theme}</div>
+          <div class="created">Created: ${this.toDate(this.created)}</div>
+        </div>
+      </div>
       <div class="results">
         ${this.items.map(
           (item, index) => html`
@@ -104,9 +126,10 @@ export class JsonAnalyzer extends LitElement {
               source=${item.href}
               title=${item.title}
               description=${item.description}
-              slug=https://www.haxtheweb.org/${item.slug}
-              location=https://www.haxtheweb.org/${item.location}
-              image=https://www.haxtheweb.org/${item.image}
+              slug="https://www.haxtheweb.org/${item.slug}"
+              location="https://www.haxtheweb.org/${item.location}"
+              img=https://www.haxtheweb.org/${item.metadata.images[0]}
+              updated=${this.toDate(item.metadata.updated)}
               locked=${item.locked}
             ></json-display>
           `
@@ -117,10 +140,8 @@ export class JsonAnalyzer extends LitElement {
     `;
   }
 
-  handleKeyDown(event) {
-    if (event.key === "Enter" || event.key === "Return") {
-      this.getData();
-    }
+  toDate(timestamp) {
+    return new Date(timestamp * 1000).toUTCString();
   }
 
   getData(e) {
@@ -134,17 +155,15 @@ export class JsonAnalyzer extends LitElement {
         if (data) {
           this.items = [];
           this.items = data.items;
-          // this.name = data.title;
-          // this.description = data.description;
-          // this.logo = data.metadata.site.logo;
-          // // make logo into image with this as the site ref
-          // this.theme = data.metadata.theme.element;
-          // this.created = data.metadata.site.created;
-          // this.lastUpdated = data.metadata.site.updated;
-          // this.hexcode = data.metadata.theme.hexCode;
-          // this.icon = data.metadata.theme.icon;
-
-          console.log(this.items);
+          this.name = data.title;
+          this.description = data.description;
+          this.logo = data.metadata.site.logo;
+          // make logo into image with this as the site ref
+          this.theme = data.metadata.theme.element;
+          this.created = data.metadata.site.created;
+          this.lastUpdated = data.metadata.site.updated;
+          this.hexcode = data.metadata.theme.hexCode;
+          this.icon = data.metadata.theme.icon;
           this.loading = false;
         }
       });
