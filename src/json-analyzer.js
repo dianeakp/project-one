@@ -35,6 +35,30 @@ export class JsonAnalyzer extends LitElement {
         transition: 0.5s all ease-in-out;
       }
 
+      .AnalyzeButton {
+        background-color: var(--ddd-theme-default-keystoneYellow);
+        height: 45px;
+        width: 120px;
+        border: 1px var(--ddd-theme-default-creekTeal) solid;
+        box-shadow: none;
+        font-family: var(--ddd-font-primary);
+        font-size: 16px;
+        border-radius: 5px;
+        display: inline-block;
+      }
+
+      input {
+        font-size: 20px;
+        line-height: 40px;
+        width: 400px;
+        left: 350px;
+        display: inline-block;
+        margin-right: 10px;
+        border-radius: 5px;
+        box-shadow: none;
+        border: 1px var(--ddd-theme-default-creekTeal) solid;
+      }
+
       details {
         margin: 16px;
         padding: 16px;
@@ -45,11 +69,6 @@ export class JsonAnalyzer extends LitElement {
         padding: 8px;
         color: white;
         font-size: 42px;
-      }
-      input {
-        font-size: 20px;
-        line-height: 40px;
-        width: 100%;
       }
     `;
   }
@@ -71,7 +90,12 @@ export class JsonAnalyzer extends LitElement {
   render() {
     return html`
       <h2>Json Analyzer! Please enter your URL</h2>
-      <input id="input" placeholder="Add URL Here" />
+      <!-- <input type="submit" value="Send Request" /> -->
+      <input
+        id="input"
+        placeholder="Add URL Here"
+        @keydown=${this.handleKeyDown}
+      />
       <button class="AnalyzeButton" @click=${this.getData}>Analyze</button>
       <div class="results">
         ${this.items.map(
@@ -93,7 +117,14 @@ export class JsonAnalyzer extends LitElement {
     `;
   }
 
-  getData() {
+  handleKeyDown(event) {
+    if (event.key === "Enter" || event.key === "Return") {
+      this.getData();
+    }
+  }
+
+  getData(e) {
+    e.preventDefault();
     this.loading = true;
     this.inputLink = this.shadowRoot.querySelector("input").value;
     fetch(`https://${this.inputLink}/site.json`)
