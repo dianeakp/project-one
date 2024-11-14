@@ -68,6 +68,13 @@ export class JsonAnalyzer extends LitElement {
         box-shadow: none;
         border: 1px var(--ddd-theme-default-creekTeal) solid;
       }
+      .item {
+        margin: 10px;
+        padding: 10px;
+        border: 1px var(--ddd-theme-default-creekTeal) solid;
+        width: 400px;
+        height: 400px;
+      }
 
       details {
         margin: 16px;
@@ -101,6 +108,7 @@ export class JsonAnalyzer extends LitElement {
     return html`
       <h2>Json Analyzer! Please enter your URL</h2>
       <!-- <input type="submit" value="Send Request" /> -->
+      <!-- Slug: see webpage, see location: see location -->
       <form>
         <input id="input" placeholder="Add URL Here" />
         <button type="submit" class="AnalyzeButton" @click=${this.getData}>
@@ -108,7 +116,8 @@ export class JsonAnalyzer extends LitElement {
         </button>
       </form>
       <div class="overview">
-        <img src="https://www.haxtheweb.org/${this.logo}" />
+        <simple-icon icon="${this.icon}"></simple-icon>
+        <img src="${this.inputLink}/${this.logo}" />
         <div class="info">
           <div class="name">${this.name}</div>
           <div class="description">${this.description}</div>
@@ -122,21 +131,28 @@ export class JsonAnalyzer extends LitElement {
       <div class="results">
         ${this.items.map(
           (item, index) => html`
-            <json-display
-              source=${item.href}
-              title=${item.title}
-              description=${item.description}
-              slug="https://www.haxtheweb.org/${item.slug}"
-              location="https://www.haxtheweb.org/${item.location}"
-              img=https://www.haxtheweb.org/${item.metadata.images[0]}
-              updated=${this.toDate(item.metadata.updated)}
-              locked=${item.locked}
-            ></json-display>
+            <div class="item">
+              <json-display
+                source="${item.href}"
+                title="${item.title}"
+                description="${item.description}"
+                slug="${item.slug}"
+                location="${item.location}"
+                img="${item.metadata &&
+                item.metadata.files &&
+                item.metadata.files[0]
+                  ? item.metadata.files[0].url
+                  : `${this.logo}`}"
+                updateddate=${this.toDate(item.metadata.updated)}
+                locked=${item.locked}
+                inputLink="${this.inputLink}"
+              ></json-display>
+            </div>
           `
         )}
       </div>
 
-      <simple-icon icon="${this.icon}"></simple-icon>
+      <!-- if img returns nothing, instead return this.backup img = URL for hax stuff -->
     `;
   }
 
@@ -148,7 +164,13 @@ export class JsonAnalyzer extends LitElement {
     e.preventDefault();
     this.loading = true;
     this.inputLink = this.shadowRoot.querySelector("input").value;
-    fetch(`https://${this.inputLink}/site.json`)
+    if (!this.inputLink.startsWith("https://")) {
+      this.inputLink = "https://" + this.inputLink;
+    }
+    if (!this.inputLink.endsWith("/site.json")) {
+      this.inputLink = this.inputLink.replace("/site.json", "");
+    }
+    fetch(`${this.inputLink}/site.json`)
       .then((d) => (d.ok ? d.json() : {}))
       .then((data) => {
         console.log(data);
@@ -164,6 +186,7 @@ export class JsonAnalyzer extends LitElement {
           this.lastUpdated = data.metadata.site.updated;
           this.hexcode = data.metadata.theme.hexCode;
           this.icon = data.metadata.theme.icon;
+          console.log(this.icon);
           this.loading = false;
         }
       });

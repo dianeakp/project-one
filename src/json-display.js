@@ -12,19 +12,21 @@ export class JsonDisplay extends DDDSuper(LitElement) {
     this.location = "";
     this.img = "";
     this.locked = "";
-    this.updated = "";
+    this.updateddate = "";
+    this.inputLink = "";
   }
 
   static get properties() {
     return {
       source: { type: String },
       title: { type: String },
-      description: { type: String, attribute: "alt-description" },
+      description: { type: String },
       slug: { type: String },
       location: { type: String },
       img: { type: String },
       locked: { type: String },
-      updated: { type: String },
+      updateddate: { type: String },
+      inputLink: { type: String },
     };
   }
 
@@ -56,14 +58,22 @@ export class JsonDisplay extends DDDSuper(LitElement) {
 
   render() {
     return html`
-      <div class="image">
-        <img src="${this.img}" alt="${this.title}" />
-        <div>Title: ${this.title}</div>
-        <div>Description: ${this.description}</div>
-        <div><a href="${this.slug}" target="_blank">Slug</a></div>
-        <div><a href="${this.location}" target="_blank">Location</a></div>
-        <div>Locked: ${this.locked}</div>
-        <div>Updated: ${this.updated}</div>
+      <div class="card-container">
+        <div class="image">
+          <img src="${this.inputLink}/${this.img}" alt="${this.title}" />
+          <div>Title: ${this.title}</div>
+          <div>${this.description}</div>
+          <div>
+            <a href="${this.inputLink}/${this.location}" target="_blank"
+              >Location</a
+            >
+          </div>
+          <div>
+            <a href="${this.inputLink}/${this.slug}" target="_blank">Slug</a>
+          </div>
+          <div>Locked: ${this.locked}</div>
+          <div>Updated: ${this.updateddate}</div>
+        </div>
       </div>
     `;
   }
