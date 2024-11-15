@@ -22,6 +22,10 @@ export class JsonAnalyzer extends LitElement {
       :host {
         display: block;
       }
+      img {
+        max-width: 200px;
+        max-height: 100px;
+      }
       :host([loading]) .results {
         opacity: 0.1;
         visibility: hidden;
@@ -115,7 +119,7 @@ export class JsonAnalyzer extends LitElement {
           Analyze
         </button>
       </form>
-      <div class="overview">
+      <div class="overview" style="background-color: ${this.hexcode}">
         <simple-icon icon="${this.icon}"></simple-icon>
         <img src="${this.inputLink}/${this.logo}" />
         <div class="info">
@@ -184,8 +188,8 @@ export class JsonAnalyzer extends LitElement {
           this.theme = data.metadata.theme.element;
           this.created = data.metadata.site.created;
           this.lastUpdated = data.metadata.site.updated;
-          this.hexcode = data.metadata.theme.hexCode;
-          this.icon = data.metadata.theme.icon;
+          this.hexcode = data.metadata.theme.variables.hexCode;
+          this.icon = data.metadata.theme.variables.icon;
           console.log(this.icon);
           this.loading = false;
         }
