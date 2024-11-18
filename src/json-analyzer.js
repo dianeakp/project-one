@@ -177,8 +177,6 @@ export class JsonAnalyzer extends LitElement {
     return html`
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <h2>Json Analyzer! Please enter your URL</h2>
-      <!-- <input type="submit" value="Send Request" /> -->
-      <!-- Slug: see webpage, see location: see location -->
       <div class="header">
         <form>
           <input id="input" placeholder="Add URL Here" />
