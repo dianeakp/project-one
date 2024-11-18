@@ -11,7 +11,7 @@ export class JsonDisplay extends DDDSuper(LitElement) {
     this.description = "";
     this.location = "";
     this.img = "";
-    this.locked = "";
+    this.order = "";
     this.updateddate = "";
     this.inputLink = "";
   }
@@ -24,7 +24,7 @@ export class JsonDisplay extends DDDSuper(LitElement) {
       slug: { type: String },
       location: { type: String },
       img: { type: String },
-      locked: { type: String },
+      order: { type: String },
       updateddate: { type: String },
       inputLink: { type: String },
     };
@@ -44,13 +44,29 @@ export class JsonDisplay extends DDDSuper(LitElement) {
         .image div {
           max-width: 240px;
           font-size: 16px;
-          font-weight: bold;
+          font-family: Helvetica, sans-serif;
+          /* font-weight: bold; */
         }
 
         .image img {
           display: block;
           width: 240px;
           height: 240px;
+          justify-content: center;
+        }
+        .title {
+          margin: 10px;
+          font-weight: bold;
+          color: var(--ddd-theme-default-success);
+        }
+        .description {
+          font-weight: lighter;
+          margin: 5px;
+        }
+        .card-container {
+          display: flex;
+          flex-direction: row;
+          justify-content: center;
         }
       `,
     ];
@@ -61,17 +77,9 @@ export class JsonDisplay extends DDDSuper(LitElement) {
       <div class="card-container">
         <div class="image">
           <img src="${this.inputLink}/${this.img}" alt="${this.title}" />
-          <div>Title: ${this.title}</div>
-          <div>${this.description}</div>
-          <div>
-            <a href="${this.inputLink}/${this.location}" target="_blank"
-              >Location</a
-            >
-          </div>
-          <div>
-            <a href="${this.inputLink}/${this.slug}" target="_blank">Slug</a>
-          </div>
-          <div>Locked: ${this.locked}</div>
+          <div class="title">Title: ${this.title}</div>
+          <div class="description">${this.description}</div>
+          <div>Order: ${this.order}</div>
           <div>Updated: ${this.updateddate}</div>
         </div>
       </div>
