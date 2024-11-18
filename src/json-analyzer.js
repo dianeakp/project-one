@@ -219,8 +219,9 @@ export class JsonAnalyzer extends LitElement {
                 inputLink="${this.inputLink}"
               ></json-display>
 
-              <!-- <a href="${this.inputLink}/${item.slug}" target="_blank"> -->
-              <button class="slug" id="btn">See Webpage</button>
+              <a href="${this.inputLink}/${item.slug}" target="_blank">
+                <button class="slug" id="btn">See Webpage</button>
+              </a>
 
               <a href="${this.inputLink}/${item.location}" target="_blank">
                 <button class="location" id="btn">See Location</button>
